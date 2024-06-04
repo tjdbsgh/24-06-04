@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+struct grade {
+    char name[20];
+    int score;
+};
+
+int main() {
+    int n, p, i, j;
+    struct grade grades[100]; 
+    struct grade temp;
+
+    scanf("%d %d", &n, &p);
+    
+    for(i = 0; i < n; i++) {
+        scanf("%s %d", grades[i].name, &grades[i].score);
+    }
+
+    for (i = 0; i < n-1; i++) {
+        for (j = 0; j < n-i-1; j++) {
+            if (grades[j].score == grades[j+1].score && j > j+1)
+                continue;
+            
+            if (grades[j].score < grades[j+1].score) {
+                temp = grades[j];
+                grades[j] = grades[j+1];
+                grades[j+1] = temp;
+            }
+        }
+    }
+
+    for (i = 0; i < p && i < n; i++) {
+        printf("%s\n", grades[i].name);
+    }
+    
+    return 0;
+}
